@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-from typing import Optional
-
-
 
 ALCOHOL_DENSITY: float = 0.8  #: density of alcohol (g/ml)
 BLOOD_DENSITY: float = 1.055  #: density of blood (g/ml)
