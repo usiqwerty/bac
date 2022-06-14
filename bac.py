@@ -23,7 +23,7 @@ def get_blood_alcohol_content(age, weight, height, female, volume, percent):
 
 
 
-def get_blood_alcohol_degradation(age, weight, height, female, minutes = 1):
+def get_blood_alcohol_degradation(age, weight, height, female, minutes):
 	gramm = ALCOHOL_DEGRADATION * weight * minutes
 	if female:
 		body_water= 0.203 - (0.07 * age) + (0.1069 * height) + (0.2466 * weight)
@@ -38,7 +38,7 @@ def between(x, a, b):
 	else:
 		return False
 
-def calc(age ,weight, height, female, volume, percent):
+def calc(age ,weight, height, female, volume, percent, minutes):
 
 	maximum=get_blood_alcohol_content(age ,weight, height, female, volume, percent)
 
@@ -70,9 +70,9 @@ if __name__=="__main__":
 	volume=int(input("volume (ml): "))
 	percent=int(input("percent: "))
 	minutes=int(input("minutes since intake: "))
-	print(age,weight,height, female, volume, percent, minutes)
+	print(age,weight,height, female, volume, percent)
 
-	max, final, msg=calc(age ,weight, height, female, volume, percent)
+	max, final, msg=calc(age ,weight, height, female, volume, percent, minutes)
 	#print ( round(permill, 4) )
 	print(msg)
 	print("after {} minutes: {} -> {}".format(minutes,round(max, 4), round(final, 4)) )
