@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 
-ALCOHOL_DENSITY: float = 0.8  #: density of alcohol (g/ml)
-BLOOD_DENSITY: float = 1.055  #: density of blood (g/ml)
-WATER_IN_BLOOD: float = 0.8  #: parts of water in blood (%)
-ALCOHOL_DEGRADATION: float = 0.002  #: for kg body weight per minute (g)
+ALCOHOL_DENSITY = 0.8  #density of alcohol (g/ml)
+BLOOD_DENSITY = 1.055  #density of blood (g/ml)
+WATER_IN_BLOOD = 0.8  #parts of water in blood (%)
+ALCOHOL_DEGRADATION = 0.002  #for kg body weight per minute (g)
 
-#given alcohol gramms
+#given alcohol is being converted from milliliters to gramms
 #body water in liter
 
 def get_blood_alcohol_content(age, weight, height, female, volume, percent, minutes):
-
 	if female:
 		body_water= 0.203 - (0.07 * age) + (0.1069 * height) + (0.2466 * weight)
 	else:
@@ -28,7 +27,7 @@ def get_blood_alcohol_content(age, weight, height, female, volume, percent, minu
 def bac(age ,weight, height, female, volume, percent, minutes):
 	current, maximum =  get_blood_alcohol_content(age, weight, height, female, volume, percent, minutes)
 
-	current = max (0, current)	#it could be negative if minutes are too big
+	current = max (0, current) #it could be negative if minutes are too big
 
 	if  current < 0.2:
 		msg="Трезвое состояние"
@@ -49,6 +48,7 @@ def bac(age ,weight, height, female, volume, percent, minutes):
 	elif current > 5:
 		msg="Высокий риск отравления, возможность смерти"
 	return maximum, current, msg
+
 if __name__=="__main__":
 	age=int(input("age: "))
 	weight=int(input("weight (kg): "))
@@ -57,10 +57,10 @@ if __name__=="__main__":
 	volume=int(input("volume (ml): "))
 	percent=int(input("percent: "))
 	minutes=int(input("minutes since intake: "))
-	print(age,weight,height, is_female, volume, percent)
+	print(age, weight, height, is_female, volume, percent)
 
 	max, final, msg = bac(age, weight, height, is_female, volume, percent, minutes)
-	#print ( round(permill, 4) )
+
 	print(msg)
-	print("after {} minutes: {} -> {}".format(minutes,round(max, 4), round(final, 4)) )
+	print(f"after {minutes} minutes: {round(max, 4)} -> {round(final, 4)}" )
 
